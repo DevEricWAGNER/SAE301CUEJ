@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{% block title %}{% endblock %}</title>
+	<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+	<link rel="stylesheet" href="css/style.css">
+    <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
+    {% block desc %}
+	
+	{% endblock %}
+	
+</head>
+
+<body>
+	<header>
+		<nav>
+			<ul class="nav_item">
+				<li><a href="index.php" class="{{accueil}}">Accueil</a></li>
+				{# <li><a href="index.php?action=create_page" class="{{create_page}}">Créer une page</a></li> #}
+				<li><a href="index.php?action=edit_page" class="{{edit_page}}">Modifier une page</a></li>
+				{# <li><a href="index.php?action=create_article" class="{{create_article}}">Créer un article</a></li> #}
+				<li><a href="index.php?action=edit_article" class="{{adit_article}}">Modifier un article</a></li>
+				<li><a href="index.php?action=create_element" class="{{create_element}}">Créer un element</a></li>
+				{# <li><a href="index.php?action=create_user" class="{{create_user}}">Créer un utilisateur</a></li> #}
+				<li><a href="index.php?action=disconnect">Se Déconnecter</a></li>
+			</ul>
+			<h1>Vous êtes connecté en tant que {{username}} !</h1>
+		</nav>
+	</header>
+	<aside>
+		<ul>
+			<li>Vos Pages :</li>
+			{% for page in pages %}
+				<li><a href="index.php?action=read_page&page_id={{page.id}}">{{page.page_name}}</a></li>                          
+			{% endfor %}
+
+
+			<li>Vos Articles : </li>
+			{% for article in articles %}
+				<li><a href="index.php?action=read_article&article_id={{article.id}}">{{article.article_name}}</a></li>                          
+			{% endfor %}
+		</ul>
+	</aside>
+	<main>
+		{% block main %}
+		{% endblock %}
+	</main>
+	<footer>
+		<p>&copy; Copyright by Eric WAGNER, Clara GOEPP, Mickaël JOLY, Axel POINTUD, Nicolas KLEIN</p>
+	</footer>
+	<script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
+	<script src="js/main.js"></script>
+	
+</body>
+
+</html>

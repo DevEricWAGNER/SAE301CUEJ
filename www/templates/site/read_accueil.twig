@@ -1,0 +1,44 @@
+{% extends "base_article.twig" %}
+
+
+{% block main %}
+    <header id="header" style=" background-image: url('./images/Bandeau_principal_home_.jpg');" class="flex flex-col justify-end px-5 pb-12 h-[90vh] bg-cover bg-center md:px-12 md:pb-[90px]">
+      <div class="relative flex">
+        <h1 class="text-xl font-bold text-white md:text-[110px]">Les <span class="text-[#DD523F]">bêtes</span> en nous </h1>
+        <a class="hidden md:block" href="#edito">
+          <div class="scroll-down"></div>
+        </a>
+      </div>
+    </header>
+
+    <section id="edito" class="py-12 container text-center">
+      <h2 class="text-5xl font-bold mb-12">Edito</h2>
+      <p class=" text-3xl leading-8 max-w-[850px] mx-auto px-3">
+        Vos animaux, vous les préférez en boule sur votre canapé, ou bien saignants dans votre assiette ? Le choix vous appartient, humains, maîtres tout-puissants du règne animal ! Comment voulez-vous qu’ils vivent ? Prostrés dans une cage minuscule ? Disséqués dans vos laboratoires ? Épanouis dans les grands espaces ? Vos choix décident de la vie et de la mort de milliards de non-humains dotés d’émotions. Alors, vous les aimez comment les animaux : affranchis ou asservis ? 
+      </p>
+      <p>Emilie Autin et Dorian Mao</p>
+    </section>
+
+    <nav id="navCategories" class="grid grid-cols-1 lg:grid-cols-3 h-[650px]">
+      {% for page in pages %}
+      
+        <div style="background:url({{page.page_img}}); background-size: cover; background-position:center;" class=" h-[720px] w-[640px] divContenu flex flex-col justify-end px-[35px] py-[60px] text-white ">
+        
+          <div>
+            <h2 class="font-bold text-4xl">{{page.page_name}}</h2>
+            <p class="mt-10 text-2xl max-w-xs">
+              {{page.page_desc}}
+            </p> 
+          </div>
+          
+          <div class="hidden text-1xl">
+            {% for article in page.articles %}
+              <a  class="flex flex-col pb-2 pl-4 hover:underline" href="index.php?action=site_article&page_id={{page.id}}&article_id={{article.id}}"> {{article.article_name}} </a>
+            {% endfor %}
+          </div>
+        </div>
+        
+      {% endfor %}
+     
+    </nav>
+{% endblock main %}

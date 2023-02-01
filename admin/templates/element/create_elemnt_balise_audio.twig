@@ -1,0 +1,65 @@
+{% extends "base.twig" %}
+
+{% block main %}
+    {% if image == 'with' %}
+        <form action="index.php?action=new_element&balise={{balise}}" method="post" enctype="multipart/form-data">
+            <div class="form_post">
+                <div class="form_form">
+                    <div class="form_input" id="InputFile">
+                        <label for="audioInp">
+                            Uploader un fichier audio 
+                            <input type="file" name="my_audio" id="audioInp" accept="audio/*"/>
+                        </label>
+                    </div>
+                    <div class="form_input" id="InputFile">
+                        <label for="imgInp">
+                            Uploader une Image 
+                            <input type="file" name="my_image_audio" id="imgInp" accept="image/*"/>
+                        </label>
+                    </div>
+
+                    <input type="text" name="title_audio" placeholder="Titre de l'audio" class="form_input">
+                    <select name="classCSS1" class="form_input">
+                        <option>Position de l'image</option>
+                        <option value="d-right">Droite</option>
+                        <option value="d-left">Gauche</option>
+                    </select>
+                    <input type="text" name="legende" id="legende" placeholder="Légende de l'audio" class="form_input">
+                    <input type="text" name="credit" id="credit" placeholder="Crédits de l'audio" class="form_input">
+                    <input type="number" name="position" id="position" min="1" max="100" placeholder="Position de l'element" class="form_input">
+                    <select name="article" class="form_input">
+                        <option value="">---Choisissez un article---</option>
+                        {% for article in articles %}
+                            <option value="{{article.id}}">{{article.article_name}}</option>                            
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <input type="submit" value="Valider" class="form_input_submit" name="submit_audio_image">
+        </form>
+    {% else %}
+        <form action="index.php?action=new_element&balise={{balise}}" method="post" enctype="multipart/form-data">
+            <div class="form_post">
+                <div class="form_form">
+                    <div class="form_input" id="InputFile">
+                        <label for="audioInp">
+                            Uploader un fichier audio 
+                            <input type="file" name="my_audio" id="audioInp" accept="audio/*"/>
+                        </label>
+                    </div>
+                    <input type="text" name="title_audio" placeholder="Titre de l'audio" class="form_input">
+                    <input type="text" name="legende" id="legende" placeholder="Légende de l'audio" class="form_input">
+                    <input type="text" name="credit" id="credit" placeholder="Crédits de l'audio" class="form_input">
+                    <input type="number" name="position" id="position" min="1" max="100" placeholder="Position de l'element" class="form_input">
+                    <select name="article" class="form_input">
+                        <option value="">---Choisissez un article---</option>
+                        {% for article in articles %}
+                            <option value="{{article.id}}">{{article.article_name}}</option>                            
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <input type="submit" value="Valider" class="form_input_submit" name="submit_audio">
+        </form>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>
+      Select files with HTML and JavaScript
+    </h1>
+    <input type="file" id="file-selector" multiple/>
+    <audio title="Noir Désir" preload="auto" controls loop>
+        <source id="preview" src="" type="audio/wav">
+        <p>Votre navigateur est trop ancien pour lire ce fichier</p>
+    </audio>
+    <ul id="output"></ul>
+    <script>
+        const preview = document.getElementById('preview');
+      const output = document.getElementById('output');
+      const fileselector = document.getElementById('file-selector');
+      if (window.FileList && window.File) {
+        document.getElementById('file-selector').addEventListener('change', event => {
+          output.innerHTML = '';
+          for (const file of event.target.files) {
+            const li = document.createElement('li');
+            const name = file.name ? file.name : 'NOT SUPPORTED';
+            const type = file.type ? file.type : 'NOT SUPPORTED';
+            const size = file.size ? file.size : 'NOT SUPPORTED';
+            li.textContent = `name: ${name}, type: ${type}, size: ${size}`;
+            output.appendChild(li);
+          }
+        });
+
+        fileselector.onchange = evt => {
+			const [file] = fileselector.files
+			if (file) {
+				preview.src = URL.createObjectURL(file);
+                preview.type = `${type}`;
+			}
+		} 
+      }
+    </script>
+</body>
+</html>

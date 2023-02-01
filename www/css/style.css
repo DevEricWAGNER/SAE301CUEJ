@@ -1,0 +1,269 @@
+body {
+	font-size: 1.1em;
+	font-family: Arial, Helvetica, sans-serif;
+	background-color: #eeeeee;
+}
+
+main, header, footer {
+	background-color: white;
+	padding: 20px 120px;
+	max-width: 800px;
+	margin: 10px auto;
+    text-align: center;
+}
+
+nav ul {
+	background-color: #eeeeee;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-around;
+    gap: 1rem;
+	margin: 0;
+	padding: 0;
+}
+
+nav ul li {
+	background-color: lightblue	;
+	list-style-type: none;
+	padding: 10px 20px;
+}
+
+main {
+	min-height: 400px;
+}
+
+.main_accueil {
+    font-family: 'Arial';
+    flex-direction: column;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24pt;
+    line-height: 55px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.main_accueil a {
+    color: #0D87FF;
+}
+
+.nav_item {
+    font-size: 20px;
+}
+
+.nav_item a {
+    color: black;
+    text-decoration: none;
+}
+
+.nav_item a:hover {
+    text-decoration: underline;
+}
+
+.active {
+    text-decoration: underline!important;
+}
+
+.form_post {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.form_post_balise {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.form_form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form_img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form_post > div > img , .form_post_balise > div > img {
+    width: 20rem;
+}
+
+.form_input{
+    width: 383px;
+    height: 44px;
+    text-align:center;
+    border:thin solid black;
+  }
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form_input_submit {
+    width: 383px;
+    height: 77px;
+    text-align: center;
+    border: thin solid black;
+    margin-top: 3.5rem;
+}
+
+.card_menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.card {
+    text-align: center;
+}
+
+textarea {
+    border: none;
+    background: none;
+    resize: none;
+    width: 100%;
+    height: 150px;
+    font-size: 1rem;
+}
+
+.delete_entry {
+    text-align: center;
+}
+.delete_entry>a {
+    color: #0D87FF;
+    text-decoration: none;
+}
+
+.template_1_div, .template_1_div_read {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+.template_1_div .template_1_a, .template_1_div_read .template_1_div_read_p, .template_1_div_read .template_1_div_read_img {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+.template_1_a, .template_1_h1_read, .template_1_p_read, .template_1_img_read {
+    margin: 3rem!important;
+    display: flex;
+    justify-content: center;
+}
+
+.template_1_a {
+    text-decoration: none;
+    color: black;
+}
+.template_1_a:hover {
+    color: #0000EE;
+    text-decoration: underline;
+}
+
+.element_details {
+    color: #0000EE;
+}
+
+.edit_img {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
+
+.form_input_paragraphe {
+    width: 50%;
+    border: 1px solid black;
+    resize: vertical;
+    margin: 0 2rem;
+    height: 77px;
+}
+
+.balise {
+    width: 50%;
+    text-align: center;
+}
+
+.formulaire_inactif {
+    display: none;
+}
+
+aside {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+aside ul {
+    margin: -1rem 1rem 1rem -1.5rem;
+}
+
+aside li {
+    list-style-type: none;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 200px;
+}
+
+aside a {
+    text-decoration: none;
+    color: black;
+    padding: 0.3rem;
+    background-color: #0D87FF;
+    font-weight: bold;
+}
+
+aside a:hover {
+    text-decoration: underline;
+    color: #eeeeee;
+}
+
+.ok {
+    background-color: lightgreen;
+}
+
+video {
+    color: #0000EE;
+}
+
+/* Style de la video */
+
+.vjs-modal-dialog-content {
+    display:flex;
+    align-items: center;
+    justify-content:center;
+    font-size: 18pt!important;
+    text-align: center;
+ }
+
+ .vjs-big-play-button {
+    transform:translate(-50%,-50%)!important;
+    left:50%!important;
+    top:50%!important;
+ } 
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.d-none {
+    display:none;
+}

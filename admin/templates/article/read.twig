@@ -1,0 +1,7 @@
+{% extends "base.twig" %}
+
+{% block main %}
+    {% for article in articles %}
+        <p>Article : <a href="index.php?action=read_article&article_id={{article.id}}">{{article.article_name}}</a></p>
+    {% endfor %}
+{% endblock main %}

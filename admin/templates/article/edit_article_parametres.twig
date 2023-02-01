@@ -1,0 +1,31 @@
+{% extends "base.twig" %}
+
+{% block main %}
+    <form action="index.php?action=update&article_id={{id_article}}" method="post" enctype="multipart/form-data">
+        <div class="form_post">
+            <div class="form_form">
+                <input type="text" name="article_name" id="article_name" placeholder="Nom de l'article" value="{{article_unique.article_name}}" class="form_input">
+                <input type="text" name="article_desc" id="article_desc" placeholder="Description de l'article" value="{{article_unique.article_desc}}" class="form_input">
+                <input type="text" name="article_chapo" id="article_chapo" placeholder="Chapo de l'article" value="{{article_unique.article_chapo}}" class="form_input">
+                <input type="text" name="article_auteur" id="article_auteur" placeholder="Auteur de l'article" value="{{article_unique.article_auteur}}" class="form_input">
+                <input type="number" name="article_time" id="article_time" placeholder="Temps de lecture de l'article" value="{{article_unique.article_time}}" class="form_input"> minutes
+                <div class="form_input">
+                    <label for="imgInp">
+                        Changer l'image Bandeau
+                        <input type="file" name="article_img" id="imgInp" accept="image/*"/>
+                    </label>
+                </div>
+                <div class="form_input">
+                    <label for="imgInp2">
+                        Changer l'image Vignette
+                        <input type="file" name="article_vignette" id="imgInp2" accept="image/*"/>
+                    </label>
+                </div>
+            </div>
+            <div class="form_img">
+                <img id="blah" src="../{{article_unique.article_img}}" alt="">
+            </div>
+        </div>
+        <input type="submit" value="Valider" class="form_input_submit" name="submit">
+    </form>
+{% endblock main %}

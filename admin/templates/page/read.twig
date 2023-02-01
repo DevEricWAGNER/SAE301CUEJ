@@ -1,0 +1,7 @@
+{% extends "base.twig" %}
+
+{% block main %}
+    {% for page in pages %}
+        <p>Article : <a href="index.php?action=read_page&page_id={{page.id}}">{{page.page_name}}</a></p>
+    {% endfor %}
+{% endblock main %}

@@ -1,0 +1,18 @@
+{% extends "base.twig" %}
+
+{% block main %}
+    <form action="index.php?action=update&page_id={{id_page}}" method="post" enctype="multipart/form-data">
+            <input type="text" name="page_name" id="page_name" placeholder="Nom de la page" value="{{page_unique.page_name}}" class="form_input">
+            <input type="text" name="page_desc" id="page_desc" placeholder="Description de la page" value="{{page_unique.page_desc}}" class="form_input">
+            <div class="form_input">
+                <label for="imgInp">
+                    Changer l'image
+                    <input type="file" name="page_img" id="imgInp" accept="image/*"/>
+                </label>
+            </div>
+            <div class="form_img">
+                <img id="blah" src="../{{page_unique.page_img}}" alt="">
+            </div>
+        <input type="submit" value="Valider" class="form_input_submit" name="submit">
+    </form>
+{% endblock main %}

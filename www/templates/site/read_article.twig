@@ -1,0 +1,433 @@
+{% extends "base_article.twig" %}
+
+{# {% set post_title = "Faire le deuil de son animal" %} #}
+{% block main %}
+<header id="header" style="
+        background-image: url('{{unique_article.article_img}}');
+      " class="flex flex-col justify-end px-5 pb-12 h-[90vh] bg-cover bg-center md:px-12 md:pb-[90px]">
+  <div class="relative flex" style="margin-left: -50px!important;">
+    <h1 style="font-family: 'Montserrat', sans-serif"
+      class="text-4xl bg-[{{unique_article.color}}] text-white py-4 px-5 font-bold drop-shadow-md md:text-6xl">
+      {{ unique_article.article_name|replace({'\\\\': "<i>", "//" : "</i>", " ?" : " ?"})|raw }}
+    </h1>
+  </div>
+</header>
+
+<p class="text-xm text-right pr-2 italic">© {{ unique_article.article_auteur }} </p>
+<!-- SUr cette page, vous trouverez tous les éléments liées à un article, il faudra faire le tri coté back -->
+<main class="container-sm">
+  <!-- Elements - Châpo d'un article  -->
+  <article class="py-10">
+    <p id="chapo" style="font-family: 'Lora', serif" class="text-3xl italic text-lef font-medium leading-10">
+        {{unique_article.article_chapo|replace({'\\\\': "<i>", "//" : "</i>", " ?" : " ?"})|raw}}
+    </p>
+    <p class="pt-4 text-xl text-[{{unique_article.color}}] font-bold">Par {{unique_article.article_auteur}} </p>
+  </article>
+  {# <p id="chapo" style="font-family: 'Lora', serif" class="text-3xl italic py-[90px] text-lef font-medium leading-10">
+    {{unique_article.article_chapo|replace({'\\\\': "<i>", "//" : "</i>", " ?" : " ?"})|raw}}
+  </p>
+  <p class="pt-4 text-xl text-[{{unique_article.color}}] font-bold">Par {{unique_article.article_auteur}} </p> #}
+
+  <section id="article">
+    {% for contenu in contenu_article %}
+      {% if contenu.balise == 'img' %}
+        {% if contenu.classCSS1 == 'float-left modal' or contenu.classCSS1 == 'float-right modal' or contenu.classCSS1 == 'float-left' or contenu.classCSS1 == 'float-right' %}
+          <div class="{{contenu.classCSS1}} divImg px-5 w-[355px] my-4">
+            <img class="max-w-full" src="{{contenu.src1}}" alt="{{contenu.alt1}}" />
+            <!-- Légendes image -->
+            <span class="text-sm my-3 block">{{contenu.legende1}}
+            </span>
+            <!-- Crédit image  -->
+            <span class="text-sm text-gray-500">{{contenu.credit1}}</span>
+          </div>
+        {% elseif contenu.classCSS1 == 'modal' or contenu.classCSS1 == '' %}
+          <article class="mt-12">
+            <div class="mt-12 {{contenu.classCSS1}}" >
+              <img src="{{contenu.src1}}" alt="{{contenu.alt1}}" />
+              <div class="flex justify-between">
+                <p class="mt-3">
+                  {{contenu.legende1}}
+                </p>
+                <p class="mt-3">{{contenu.credit1}}</p>
+              </div>
+            </div>
+          </article>
+        {% endif %}
+      {% elseif contenu.balise == 'audio' %}
+        {% if contenu.classCSS1 == 'd-left' or contenu.classCSS1 == 'd-right' %}
+          <article class="my-4" style="--coloraudio:{{unique_article.color}}">
+            <div class="pr-5 w-[255px]">
+              <div class="audio-player-container">
+                <div class="music-info">
+                  <div class="top-information">
+                    <div class="top-left-content">
+                      <h1 class="music-title">{{contenu.title_audio}}</h1>
+                      <p class="artist-name">{{contenu.credit1}}</p>
+                    </div>
+                  </div>
+          
+                  <audio id="audio" src="{{contenu.src1}}" type="audio/mp3"></audio>
+                  <div class="progress-container">
+                    <div class="progress-container">
+                      <div class="progress-bar"></div>
+                      <span class="time-indicator current-time">0:00</span>
+                      <span class="time-indicator duration-time">0:00</span>
+                    </div>
+                  </div>
+                  <nav class="navigation">
+                    <button id="playpause" class="play-btn">
+                      <img src="ressources/icons/play-icon.svg" alt="" />
+                    </button>
+                  </nav>
+                </div>
+              </div>
+
+              <!-- Légendes image -->
+              <span class="text-sm my-3 block">{{contenu.legende1}}
+              </span>
+            </div>
+          </article>
+        {% else %}
+          <article class="mt-12">
+            <div class="mt-12">
+              {# <audio controls src="{{contenu.src1}}" type="audio/mp3"></audio> #}
+              {# 
+
+                          ###########################
+                          ########## AUDIO ##########
+                          ###########################
+
+                          ##### VARIABLES #####
+                          {{contenu.classCSS1}}
+                          {{contenu.src1}}
+                          {{unique_article.color}}
+
+                          #}
+                          <div class="audio-player-container">
+                            <div class="thumbnail-container">
+                              <img
+                                src="https://images.unsplash.com/photo-1465215872600-ad89fd2f1724?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+                                alt="album thumbnail"
+                                class="thumbnail"
+                              />
+                            </div>
+                            <div class="music-info">
+                              <div class="top-information">
+                                <div class="top-left-content">
+                                  <h1 class="music-title">{{contenu.title_audio}}</h1>
+                                  <p class="artist-name">{{contenu.credit1}}</p>
+                                </div>
+                              </div>
+                      
+                              <audio id="audio" src="{{contenu.src1}}" type="audio/mp3"></audio>
+                              <div class="progress-container">
+                                <div class="progress-container">
+                                  <div class="progress-bar"></div>
+                                  <span class="time-indicator current-time">0:00</span>
+                                  <span class="time-indicator duration-time">0:00</span>
+                                </div>
+                              </div>
+                              <nav class="navigation">
+                                <button id="playpause" class="play-btn">
+                                  <img src="ressources/icons/play-icon.svg" alt="" />
+                                </button>
+                              </nav>
+                            </div>
+                          </div>
+
+              <!-- Légendes image -->
+              <span class="text-sm my-3 block">{{contenu.legende1}}
+              </span>
+            </div>
+          </article>
+        {% endif %}
+      {% elseif contenu.balise == 'audio_image' %}
+        {% if contenu.classCSS1 == 'd-left' or contenu.classCSS1 == 'd-right' or contenu.classCSS1 == 'd-top' or contenu.classCSS1 == 'd-bottom' %}
+          
+          <article class="my-4" style="--coloraudio:{{unique_article.color}}">
+            <div class="pr-5">
+              <div class="audio-player" style="margin-bottom: 30px;">
+                <div class="cover" style="background: url('{{contenu.src_media1}}'); background-size:cover;"></div>
+
+                <div class="info">
+                  <h2 class="audio-title">{{contenu.title_audio}}</h2>
+                  <p class="audio-author">{{contenu.credit1}}</p>
+
+                  <audio src="{{contenu.src1}}"></audio>
+                  <button class="btn-play btn-audio text-center">
+                    <img src="icons/play-icon.svg" alt="play" class=" w-full non-agrandi" />
+                  </button>
+                  <button class="btn-pause btn-audio text-center">
+                    <img src="icons/pause-icon.svg" alt="pause" class="non-agrandi" />
+                  </button>
+                  <button class="btn-stop btn-audio text-center">
+                    <img src="icons/icon-stop.svg" alt="stop" class="non-agrandi" />
+                  </button>
+                  <progress class="progress-audio" value="0"></progress>
+                  <span class="time-audio"></span>
+
+                  <span></span>
+                </div>
+              </div>
+
+              <!-- Légendes image -->
+              <span class="text-sm my-3 block">{{contenu.legende1}}
+              </span>
+            </div>
+          </article>
+        {% endif %}
+      {% elseif contenu.balise == 'video' %}
+        {% if contenu.classCSS1 == 'float-left' or contenu.classCSS1 == 'float-right' %}
+          <article class="4px">
+            <div class="{{contenu.classCSS1}} pr-5 w-[255px]">
+              {# 
+
+                        ###########################
+                        ########## VIDEO ##########
+                        ###########################
+
+                        ##### VARIABLES #####
+                        {{contenu.classCSS1}}
+                        {{contenu.src1}}
+                        {{contenu.src_media1}}
+                        {{contenu.alt_media1}}
+                        {{unique_article.color}}
+
+                        #}
+
+                        <video
+                        id="my-video"
+                        class="video-js vjs-matrix w-full "
+                        controls
+                        preload="auto"
+                        poster={{contenu.src_media1}}
+                        data-setup='{ "playbackRates": [0.5, 1, 1.5, 2] }'
+                        style="--color:{{unique_article.color}}"
+                       >
+                        <source src={{contenu.src1}} type="video/mp4" />
+                        <p class="vjs-no-js vjs-big-play-centered">
+                          Pour voir cette vidéo, activez le javascript ou mettez à jour votre navigateur. 
+                          <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                        </p>
+                       </video>
+
+              <!-- Légendes image -->
+              <span class="text-sm my-3 block">{{contenu.legende1}}
+              </span>
+              <!-- Crédit image  -->
+              <span class="text-sm text-gray-500">{{contenu.credit1}}</span>
+            </div>
+          </article>
+        {% elseif contenu.classCSS1 == 'modal' or contenu.classCSS1 == '' %}
+          <article class="mt-12">
+            <div class="mt-12">
+              {# 
+
+              ###########################
+              ########## VIDEO ##########
+              ###########################
+
+              ##### VARIABLES #####
+              {{contenu.classCSS1}}
+              {{contenu.src1}}
+              {{contenu.src_media1}}
+              {{contenu.alt_media1}}
+              {{unique_article.color}}
+
+              #}
+              <div class="w-full">
+              <video
+                id="my-video"
+                class="video-js vjs-matrix vjs-fluid"
+                controls
+                preload="auto"
+                poster={{contenu.src_media1}}
+                data-setup='{ "playbackRates": [0.5, 1, 1.5, 2] }'
+                style="--color:{{unique_article.color}}"
+                >
+                <source src={{contenu.src1}} type="video/mp4" />
+                <p class="vjs-no-js vjs-big-play-centered">
+                  Pour voir cette vidéo, activez le javascript ou mettez à jour votre navigateur. 
+                  <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                </p>
+              </video>
+              </div>
+
+              <div class="flex justify-between">
+                <p class="mt-3">
+                  {{contenu.legende1}}
+                </p>
+                <p class="mt-3">{{contenu.credit1}}</p>
+              </div>
+            </div>
+          </article>
+        {% endif %}
+      {% elseif contenu.balise == 'p' %}
+        <article>
+          <p class="text-lg py-4">{{contenu.content|replace({'\\\\': "<i>", "//" : "</i>", " ?" : " ?", "**" : "<b>", "--" : "</b>"})|raw}}</p>
+        </article>
+      {% elseif contenu.balise == 'h3' %}
+        <article>
+          <h3 style="font-family: 'Montserrat', sans-serif"
+            class="text-3xl w-fit px-3 mb-4 border-b-4 border-[{{unique_article.color}}] mb-[25px] clear-both">
+            {{contenu.content|replace({'\\\\': "<i>", "//" : "</i>", " ?" : " ?", "**" : "<b>", "--" : "</b>"})|raw}}
+          </h3>
+        </article>
+      {% elseif contenu.balise == 'h2' %}
+        <article>
+          <h2 style="font-family: 'Montserrat', sans-serif"
+            class="text-2xl w-fit px-3 mb-4 border-b-4 border-[{{unique_article.color}}] mb-[25px] clear-both">
+            {{contenu.content|replace({'\\\\': "<i>", "//" : "</i>", " ?" : " ?", "**" : "<b>", "--" : "</b>"})|raw}}
+          </h2>
+        </article>
+      {% elseif contenu.balise == 'img_img' %}
+        <article>
+          <div class="flex justify-between">
+            <div>
+              <img class="max-w-full" src="{{contenu.src1}}" alt="{{contenu.alt1}}" />
+              <!-- Légendes image -->
+              <span class="text-sm my-3 block">{{contenu.legende1}}
+              </span>
+              <!-- Crédit image  -->
+              <span class="text-sm text-gray-500">{{contenu.credit1}}</span>
+            </div>
+            <div>
+              <img class="max-w-full" src="{{contenu.src2}}" alt="{{contenu.alt2}}" />
+              <!-- Légendes image -->
+              <span class="text-sm my-3 block">{{contenu.legende2}}
+              </span>
+              <!-- Crédit image  -->
+              <span class="text-sm text-gray-500">{{contenu.credit2}}</span>
+            </div>
+          </div>
+        </article>
+      {% elseif contenu.balise == 'video_video' %}
+        <article>
+          <div class="flex">
+            <div>
+              
+                        <video
+                        id="my-video"
+                        class="video-js vjs-matrix"
+                        controls
+                        preload="auto"
+                        width="640"
+                        height="264"
+                        poster={{contenu.src_media1}}
+                        data-setup='{ "playbackRates": [0.5, 1, 1.5, 2] }'
+                        style="--color:{{unique_article.color}}"
+                       >
+                        <source src={{contenu.src1}} type="video/mp4" />
+                        <p class="vjs-no-js vjs-big-play-centered">
+                          Pour voir cette vidéo, activez le javascript ou mettez à jour votre navigateur. 
+                          <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                        </p>
+                       </video>
+              <span class="text-sm my-3 block">{{contenu.legende1}}
+              </span>
+              <!-- Crédit image  -->
+              <span class="text-sm text-gray-500">{{contenu.credit1}}</span>
+            </div>
+            <div>
+              
+                        <video
+                        id="my-video"
+                        class="video-js vjs-matrix"
+                        controls
+                        preload="auto"
+                        width="640"
+                        height="264"
+                        poster={{contenu.src_media2}}
+                        data-setup='{ "playbackRates": [0.5, 1, 1.5, 2] }'
+                        style="--color:{{unique_article.color}}"
+                       >
+                        <source src={{contenu.src2}} type="video/mp4" />
+                        <p class="vjs-no-js vjs-big-play-centered">
+                          Pour voir cette vidéo, activez le javascript ou mettez à jour votre navigateur. 
+                          <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                        </p>
+                       </video>
+              <!-- Légendes image -->
+              <span class="text-sm my-3 block">{{contenu.legende2}}
+              </span>
+              <!-- Crédit image  -->
+              <span class="text-sm text-gray-500">{{contenu.credit2}}</span>
+            </div>
+          </div>
+        </article>
+      {% elseif contenu.balise == 'encadre_media' %}
+        <article class="mt-12 p-7 bg-[{{unique_article.color}}] text-white">
+          <h4 style="font-family: 'Montserrat', sans-serif"
+            class="text-2xl w-fit px-3 mb-4 border-b-4 border-white mb-[25px]">
+            {{contenu.encadre_titre}}
+          </h4>
+
+          <div class="mt-12">
+            <img src="{{contenu.src1}}" alt="{{contenu.alt1}}" />
+            <div class="flex justify-between">
+              <p class="mt-3">
+                {{contenu.legende1}}
+              </p>
+              <p class="mt-3">{{contneu.credit1}}</p>
+            </div>
+          </div>
+        </article>
+      {% elseif contenu.balise == 'encadre_content' %}
+        <article class="mt-12 p-7 bg-[{{unique_article.color}}] text-white">
+          <h4 style="font-family: 'Montserrat', sans-serif"
+            class="text-2xl w-fit px-3 mb-4 border-b-4 border-white mb-[25px]">
+            {{contenu.encadre_titre}}
+          </h4>
+
+          <p class="text-lg">
+            {{contenu.content|replace({'\\\\': "<i>", "//" : "</i>", " ?" : " ?", "**" : "<b>", "--" : "</b>"})|raw}}
+          </p>
+        </article>
+      {% elseif contenu.balise == 'h5' %}
+        <article class="py-[120px]">
+          <h5 class="italic text-center text-3xl clear-both" style="font-family: 'Lora', serif">
+            <span class="text-[{{unique_article.color}}] font-bold"> « </span>
+            {{contenu.content|replace({'\\\\': "<i>", "//" : "</i>", " ?" : " ?", "**" : "<b>", "--" : "</b>"})|raw}}
+            <span class="text-[{{unique_article.color}}] font-bold"> » </span>
+          </h5>
+        </article>
+      {% endif %}
+      {# <p>{{contenu.position}}</p> #}
+    {% endfor %}
+
+  </section>
+
+
+</main>
+
+<!-- Section - Autres articles  -->
+    <section id="articles" class="p-12 bg-[{{unique_article.color}}] text-white clear-both" style="margin-bottom: -170px; max-height: 650px!important">
+      <h3
+        style="font-family: 'Montserrat', sans-serif"
+        class="text-3xl w-fit mx-auto mb-[30px] px-3 text-center mb-4 border-b-4 border-white mb-[25px]"
+      >
+      Découvrez aussi
+      </h3>
+      <div class="swiper"  style="max-height: 500px!important">
+        <div class="swiper-wrapper">
+          <!-- Slides -->
+        {% for articles_not_in_this_article in articles_in_unique_page %}
+          <div class="swiper-slide h-fit">
+            <a href="index.php?action=site_article&page_id={{unique_article.id}}&article_id={{articles_not_in_this_article.id}}">
+              <img class="w-full h-[350px] non-agrandi" src="{{articles_not_in_this_article.article_vignette}}" alt="" />
+              <h3 class="my-3 font-bold text-xl">
+                {{articles_not_in_this_article.article_name}}
+              </h3>
+              <span class="text-white">{{articles_not_in_this_article.article_auteur}}</span>
+            </a>
+          </div>
+        {% endfor %}
+        </div>
+
+        <!-- navigations -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+    </section>
+
+{% endblock %}

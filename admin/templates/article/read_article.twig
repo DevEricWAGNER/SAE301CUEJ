@@ -1,0 +1,363 @@
+{% extends "base.twig" %}
+
+{% block title %}
+    {{unique_article.article_name}}
+{% endblock %}
+
+{% block desc %}
+  <meta name="description" content="{{unique_article.article_desc}}"> {# VISIBLE QUE SI LE SITE EST REFERENCE SUR LE WEB #}
+{% endblock %}
+
+{% block main %}
+    <h1>{{unique_article.article_name}}</h1>
+    <img src="{{unique_article.article_img}}">
+    <h2>{{unique_article.article_chapo}}</h2>
+    {% for contenu in contenu_article %}
+        <hr>
+        {% if contenu.balise == 'img' %}
+            <div class="{{contenu.classCSS1}}">
+                <img src="{{contenu.src1}}" alt="{{contenu.alt1}}">
+                <br>
+                <span class="credit">{{contenu.credit1}}</span>
+                <span class="legende">{{contenu.legende1}}</span>
+            </div>
+        {% elseif contenu.balise == 'video' %}
+            <video id="my-video" class="video-js" style="--color:{{unique_article.color}}" controls preload="auto" width="160" poster="{{contenu.src_media1}}" data-setup='{ "playbackRates": [0.5, 1, 1.5, 2] }'>
+                <source src="{{contenu.src1}}" type="video/mp4" />
+            </video>
+            <br>
+            <span class="credit">{{contenu.credit1}}</span>
+            <span class="legende">{{contenu.legende1}}</span>
+        {% elseif contenu.balise == 'audio_image' %}
+            <img src="{{contenu.src_media1}}" alt="{{contenu.alt_media1}}" class="{{contenu.classCSS1}}">
+            <audio controls src="{{contenu.src1}}" type="audio/mp3"></audio>
+            <br>
+            <span class="credit">{{contenu.credit1}}</span>
+            <span class="legende">{{contenu.legende1}}</span>
+        {% elseif contenu.balise == 'audio' %}
+            <audio controls src="{{contenu.src1}}" type="audio/mp3"></audio>
+            <br>
+            <span class="credit">{{contenu.credit1}}</span>
+            <span class="legende">{{contenu.legende1}}</span>
+        {% elseif contenu.balise == 'img_img' %}
+            <div class="flex-row">
+                <div>
+                    <img src="{{contenu.src1}}" class="{{contenu.classCSS1}}">
+                    <span>{{contenu.legende1}}</span>
+                    <br>
+                    <span>{{contenu.credit1}}</span>
+                </div>
+                <div>
+                    <img src="{{contenu.src2}}" class="{{contenu.classCSS2}}">
+                    <span>{{contenu.legende2}}</span>
+                    <br>
+                    <span>{{contenu.credit2}}</span>
+                </div>
+            </div>
+        {% elseif contenu.balise == 'img_audio_image' %}
+            <div class="flex-row">
+                <div>
+                    <img src="{{contenu.src1}}" class="{{contenu.classCSS1}}">
+                    <span>{{contenu.legende1}}</span>
+                    <br>
+                    <span>{{contenu.credit1}}</span>
+                </div>
+                <div>
+                    <img src="{{contenu.src_media2}}" alt="{{contenu.alt_media2}}" class="{{contenu.classCSS2}}">
+                    <audio controls src="{{contenu.src2}}" type="audio/mp3"></audio>
+                    <span>{{contenu.legende2}}</span>
+                    <br>
+                    <span>{{contenu.credit2}}</span>
+                </div>
+            </div>
+        {% elseif contenu.balise == 'img_audio' %}
+            <div class="flex-row">
+                <div>
+                    <img src="{{contenu.src1}}" class="{{contenu.classCSS1}}">
+                    <span>{{contenu.legende1}}</span>
+                    <br>
+                    <span>{{contenu.credit1}}</span>
+                </div>
+                <div>
+                    <audio controls src="{{contenu.src2}}" type="audio/mp3"></audio>
+                    <span>{{contenu.legende2}}</span>
+                    <br>
+                    <span>{{contenu.credit2}}</span>
+                </div>
+            </div>
+        {% elseif contenu.balise == 'img_video' %}
+            <div class="flex-row">
+                <div>
+                    <img src="{{contenu.src1}}" alt="{{contenu.alt1}}" class="{{contenu.classCSS1}}">
+                    <span>{{contenu.legende1}}</span>
+                    <br>
+                    <span>{{contenu.credit1}}</span>
+                </div>
+                <div>
+                    <video id="my-video" class="video-js" controls preload="auto" width="160" poster="{{contenu.src_media2}}" data-setup='{ "playbackRates": [0.5, 1, 1.5, 2] }'>
+                        <source src="{{contenu.src2}}" type="video/mp4" />
+                    </video>
+                    <span>{{contenu.legende2}}</span>
+                    <br>
+                    <span>{{contenu.credit2}}</span>
+                </div>
+            </div>
+        {% elseif contenu.balise == 'video_img' %}
+            <div class="flex-row">
+                <div>
+                    <video id="my-video" class="video-js" controls preload="auto" width="160" poster="{{contenu.src_media1}}" data-setup='{ "playbackRates": [0.5, 1, 1.5, 2] }'>
+                        <source src="{{contenu.src1}}" type="video/mp4" />
+                    </video>
+                    <span>{{contenu.legende1}}</span>
+                    <br>
+                    <span>{{contenu.credit1}}</span>
+                </div>
+                <div>
+                    <img src="{{contenu.src2}}" alt="{{contenu.alt2}}" class="{{contenu.classCSS2}}">
+                    <span>{{contenu.legende2}}</span>
+                    <br>
+                    <span>{{contenu.credit2}}</span>
+                </div>
+            </div>
+        {% elseif contenu.balise == 'video_video' %}
+            <div class="flex-row">
+                <div>
+                    <video id="my-video" class="video-js" controls preload="auto" width="160" poster="{{contenu.src_media1}}" data-setup='{ "playbackRates": [0.5, 1, 1.5, 2] }'>
+                        <source src="{{contenu.src1}}" type="video/mp4" />
+                    </video>
+                    <span>{{contenu.legende1}}</span>
+                    <br>
+                    <span>{{contenu.credit1}}</span>
+                </div>
+                <div>
+                    <video id="my-video" class="video-js" controls preload="auto" width="160" poster="{{contenu.src_media2}}" data-setup='{ "playbackRates": [0.5, 1, 1.5, 2] }'>
+                        <source src="{{contenu.src2}}" type="video/mp4" />
+                    </video>
+                    <span>{{contenu.legende2}}</span>
+                    <br>
+                    <span>{{contenu.credit2}}</span>
+                </div>
+            </div>
+        {% elseif contenu.balise == 'video_audio' %}
+            <div class="flex-row">
+                <div>
+                    <video id="my-video" class="video-js" controls preload="auto" width="160" poster="{{contenu.src_media1}}" data-setup='{ "playbackRates": [0.5, 1, 1.5, 2] }'>
+                        <source src="{{contenu.src1}}" type="video/mp4" />
+                    </video>
+                    <span>{{contenu.legende1}}</span>
+                    <br>
+                    <span>{{contenu.credit1}}</span>
+                </div>
+                <div>
+                    <audio controls src="{{contenu.src2}}" type="audio/mp3"></audio>
+                    <span>{{contenu.legende2}}</span>
+                    <br>
+                    <span>{{contenu.credit2}}</span>
+                </div>
+            </div>
+        {% elseif contenu.balise == 'video_audio_image' %}
+            <div class="flex-row">
+                <div>
+                    <video id="my-video" class="video-js" controls preload="auto" width="160" poster="{{contenu.src_media1}}" data-setup='{ "playbackRates": [0.5, 1, 1.5, 2] }'>
+                        <source src="{{contenu.src1}}" type="video/mp4" />
+                    </video>
+                    <span>{{contenu.legende1}}</span>
+                    <br>
+                    <span>{{contenu.credit1}}</span>
+                </div>
+                <div>
+                    <img src="{{contenu.src_media2}}" alt="{{contenu.alt_media2}}" class="{{contenu.classCSS2}}">
+                    <audio controls src="{{contenu.src2}}" type="audio/mp3"></audio>
+                    <span>{{contenu.legende2}}</span>
+                    <br>
+                    <span>{{contenu.credit2}}</span>
+                </div>
+            </div>
+        {% elseif contenu.balise == 'audio_image_img' %}
+            <div class="flex-row">
+                <div>
+                    <img src="{{contenu.src_media1}}" alt="{{contenu.alt_media1}}" class="{{contenu.classCSS1}}">
+                    <audio controls src="{{contenu.src1}}" type="audio/mp3"></audio>
+                    <span>{{contenu.legende1}}</span>
+                    <br>
+                    <span>{{contenu.credit1}}</span>
+                </div>
+                <div>
+                    <img src="{{contenu.src2}}" alt="{{contenu.alt2}}" class="{{contenu.classCSS2}}">
+                    <span>{{contenu.legende2}}</span>
+                    <br>
+                    <span>{{contenu.credit2}}</span>
+                </div>
+            </div>
+        {% elseif contenu.balise == 'audio_img' %}
+            <div class="flex-row">
+                <div>
+                    <audio controls src="{{contenu.src1}}" type="audio/mp3"></audio>
+                    <span>{{contenu.legende1}}</span>
+                    <br>
+                    <span>{{contenu.credit1}}</span>
+                </div>
+                <div>
+                    <img src="{{contenu.src2}}" alt="{{contenu.alt2}}" class="{{contenu.classCSS2}}">
+                    <span>{{contenu.legende2}}</span>
+                    <br>
+                    <span>{{contenu.credit2}}</span>
+                </div>
+            </div>
+        {% elseif contenu.balise == 'audio_image_video' %}
+            <div class="flex-row">
+                <div>
+                    <img src="{{contenu.src_media1}}" alt="{{contenu.alt_media1}}" class="{{contenu.classCSS1}}">
+                    <audio controls src="{{contenu.src1}}" type="audio/mp3"></audio>
+                    <span>{{contenu.legende1}}</span>
+                    <br>
+                    <span>{{contenu.credit1}}</span>
+                </div>
+                <div>
+                    <video id="my-video" class="video-js" controls preload="auto" width="160" poster="{{contenu.src_media2}}" data-setup='{ "playbackRates": [0.5, 1, 1.5, 2] }'>
+                        <source src="{{contenu.src2}}" type="video/mp4" />
+                    </video>
+                    <span>{{contenu.legende2}}</span>
+                    <br>
+                    <span>{{contenu.credit2}}</span>
+                </div>
+            </div>
+        {% elseif contenu.balise == 'audio_video' %}
+            <div class="flex-row">
+                <div>
+                    <audio controls src="{{contenu.src1}}" type="audio/mp3"></audio>
+                    <span>{{contenu.legende1}}</span>
+                    <br>
+                    <span>{{contenu.credit1}}</span>
+                </div>
+                <div>
+                    <video id="my-video" class="video-js" controls preload="auto" width="160" poster="{{contenu.src_media2}}" data-setup='{ "playbackRates": [0.5, 1, 1.5, 2] }'>
+                        <source src="{{contenu.src2}}" type="video/mp4" />
+                    </video>
+                    <span>{{contenu.legende2}}</span>
+                    <br>
+                    <span>{{contenu.credit2}}</span>
+                </div>
+            </div>
+        {% elseif contenu.balise == 'audio_image_audio' %}
+            <div class="flex-row">
+                <div>
+                    <img src="{{contenu.src_media1}}" alt="{{contenu.alt_media1}}" class="{{contenu.classCSS1}}">
+                    <audio controls src="{{contenu.src1}}" type="audio/mp3"></audio>
+                    <span>{{contenu.legende1}}</span>
+                    <br>
+                    <span>{{contenu.credit1}}</span>
+                </div>
+                <div>
+                    <audio controls src="{{contenu.src2}}" type="audio/mp3"></audio>
+                    <span>{{contenu.legende2}}</span>
+                    <br>
+                    <span>{{contenu.credit2}}</span>
+                </div>
+            </div>
+        {% elseif contenu.balise == 'audio_image_audio_image' %}
+            <div class="flex-row">
+                <div>
+                    <img src="{{contenu.src_media1}}" alt="{{contenu.alt_media1}}" class="{{contenu.classCSS1}}">
+                    <audio controls src="{{contenu.src1}}" type="audio/mp3"></audio>
+                    <span>{{contenu.legende1}}</span>
+                    <br>
+                    <span>{{contenu.credit1}}</span>
+                </div>
+                <div>
+                    <img src="{{contenu.src_media2}}" alt="{{contenu.alt_media2}}" class="{{contenu.classCSS2}}">
+                    <audio controls src="{{contenu.src2}}" type="audio/mp3"></audio>
+                    <span>{{contenu.legende2}}</span>
+                    <br>
+                    <span>{{contenu.credit2}}</span>
+                </div>
+            </div>
+        {% elseif contenu.balise == 'audio_audio_image' %}
+            <div class="flex-row">
+                <div>
+                    <audio controls src="{{contenu.src1}}" type="audio/mp3"></audio>
+                    <span>{{contenu.legende1}}</span>
+                    <br>
+                    <span>{{contenu.credit1}}</span>
+                </div>
+                <div>
+                    <img src="{{contenu.src_media2}}" alt="{{contenu.alt_media2}}" class="{{contenu.classCSS2}}">
+                    <audio controls src="{{contenu.src2}}" type="audio/mp3"></audio>
+                    <span>{{contenu.legende2}}</span>
+                    <br>
+                    <span>{{contenu.credit2}}</span>
+                </div>
+            </div>
+        {% elseif contenu.balise == 'audio_audio' %}
+            <div class="flex-row">
+                <div>
+                    <audio controls src="{{contenu.src1}}" type="audio/mp3"></audio>
+                    <span>{{contenu.legende1}}</span>
+                    <br>
+                    <span>{{contenu.credit1}}</span>
+                </div>
+                <div>
+                    <audio controls src="{{contenu.src2}}" type="audio/mp3"></audio>
+                    <span>{{contenu.legende2}}</span>
+                    <br>
+                    <span>{{contenu.credit2}}</span>
+                </div>
+            </div>
+        {% elseif contenu.balise == 'encadre_content' %}
+            <div>
+                <h4>{{contenu.encadre_titre}}</h4>
+                <p>{{contenu.content}}</p>
+            </div>
+        {% elseif contenu.balise == 'encadre_img' %}
+            <div>
+                <h4>{{contenu.encadre_titre}}</h4>
+                <img src="{{contenu.src1}}" alt="{{contenu.alt1}}">
+                <br>
+                <span class="credit">{{contenu.credit1}}</span>
+                <span class="legende">{{contenu.legende1}}</span>
+            </div>
+        {% elseif contenu.balise == 'encadre_audio' %}
+            <div>
+                <h4>{{contenu.encadre_titre}}</h4>
+                <audio controls src="{{contenu.src1}}" type="audio/mp3"></audio>
+                <br>
+                <span class="credit">{{contenu.credit1}}</span>
+                <span class="legende">{{contenu.legende1}}</span>
+            </div>
+        {% elseif contenu.balise == 'encadre_audio_image' %}
+            <div>
+                <h4>{{contenu.encadre_titre}}</h4>
+                <img src="{{contenu.src_media1}}" alt="{{contenu.alt_media1}}" class="{{contenu.classCSS1}}">
+                <audio controls src="{{contenu.src1}}" type="audio/mp3"></audio>
+                <br>
+                <span class="credit">{{contenu.credit1}}</span>
+                <span class="legende">{{contenu.legende1}}</span>
+            </div>
+        {% elseif contenu.balise == 'encadre_video' %}
+            <div>
+                <h4>{{contenu.encadre_titre}}</h4>
+                <video id="my-video" class="video-js" controls preload="auto" width="160" poster="{{contenu.src_media1}}" data-setup='{ "playbackRates": [0.5, 1, 1.5, 2] }'>
+                    <source src="{{contenu.src1}}" type="video/mp4" />
+                </video>
+                <br>
+                <span class="credit">{{contenu.credit1}}</span>
+                <span class="legende">{{contenu.legende1}}</span>
+            </div>
+        {% else %}
+            <{{contenu.balise}} class="{{contenu.classCSS1}}">{{contenu.content|replace({'\\\\': "<i>", "//" : "</i>"})|raw}}</{{contenu.balise}}>
+        {% endif %}
+        <a href="index.php?action=element_delete&element_id={{contenu.id}}">Supprimer</a>
+    {% endfor %}
+        <hr>
+
+    {# {% for article_in_page in articles_in_unique_page %}
+        <h1>{{article_in_page.article_name}}</h1>
+        <p>{{article_in_page.article_desc}}</p>
+        <p>{{article_in_page.article_chapo}}</p>
+        <span>{{article_in_page.article_auteur}}</span>
+        <h6>{{article_in_page.article_time}}</h6>
+        <img src="{{article_in_page.article_img}}">
+        <img src="{{article_in_page.article_vignette}}">
+    {% endfor %} #}
+    <p>{{unique_article.article_auteur}}</p>
+{% endblock %}

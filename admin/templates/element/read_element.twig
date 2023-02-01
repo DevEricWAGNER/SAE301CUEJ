@@ -1,0 +1,24 @@
+{% extends "base.twig" %}
+
+{% block title %}
+    {{title}}
+{% endblock %}
+
+{% block desc %}
+  <meta name="description" content="{{desc}}"> {# VISIBLE QUE SI LE SITE EST REFERENCE SUR LE WEB #}
+{% endblock %}
+
+{% block main %}
+    <h1>{{h1}}</h1>
+    <h2>{{chapo}}</h2>
+    {% for contenu in contenu_element %}
+        {% if element.balise != 'img' and element.balise != 'a' %}
+            <{{element.balise}} class="{{element.classCSS}}">{{element.content}}</{{element.balise}}>
+        {% elseif element.balise == 'img' %}
+            <img src="{{element.img_src}}" alt="{{element.img_alt}}" class="{{element.classCSS}}">
+        {% elseif element.balise == 'a' %}
+            <a href="{{element.link}}" class="{{element.classCSS}}">{{element.content}}</a>
+        {% endif %}
+    {% endfor %}
+    <p>{{auteur}}</p>
+{% endblock %}

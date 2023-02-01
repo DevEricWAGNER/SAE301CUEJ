@@ -1,0 +1,7 @@
+{% extends "base.twig" %}
+
+{% block main %}
+    {% for element in elements %}
+        <p>Element : <a href="index.php?action=read_element&element_id={{element.id}}">{{element.element_content}}</a></p>
+    {% endfor %}
+{% endblock main %}

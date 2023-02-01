@@ -1,0 +1,149 @@
+{% extends "base.twig" %}
+
+{% block main %}
+    {% if balise == 'content_media' %}
+        <h1>Vous avez choisi de créer un élément contenant un contenu à gauche et un média à droite</h1>
+    {% elseif balise == 'media_content' %}
+        <h1>Vous avez choisi de créer un élément contenant un média à gauche et un content à droite</h1>
+    {% endif %}
+    <form method="post" action="index.php?action=new_element&balise={{balise}}&element1={{element1}}&element2={{element2}}" enctype="multipart/form-data">
+       <div class="form_post">
+            <div class="form_form">
+                <h1>Vous avez choisi la balise {{element1}}</h1>
+                {% if element1 == 'img' %}
+                    <select name="classCSS1" id="classCSS" class="form_input">
+                        <option value="">--- Choisissez un style ---</option>
+                        <option value="modal">Avec Trigger</option>
+                        <option value="">Sans Trigger</option>
+                    </select>
+                    <div class="form_input" id="InputFile">
+                        <label for="imgInp1">
+                            Changer l'image
+                            <input type="file" name="my_image1" id="imgInp1" accept="image/*"/>
+                        </label>
+                    </div>
+                    <input type="text" name="legende1" id="legende" placeholder="Légende de l'image" class="form_input">
+                    <input type="text" name="credit1" id="credit" placeholder="Crédits de l'image" class="form_input">
+                {% elseif element1 == 'audio' %}
+                    <div class="form_input" id="InputFile">
+                        <label for="audioInp1">
+                            Uploader un fichier audio 
+                            <input type="file" name="my_audio1" id="audioInp1" accept="audio/*"/>
+                        </label>
+                    </div>
+                    <input type="text" name="legende1" id="legende" placeholder="Légende de l'audio" class="form_input">
+                    <input type="text" name="credit1" id="credit" placeholder="Crédits de l'audio" class="form_input">
+                {% elseif element1 == 'audio_image' %}
+                    <div class="form_input" id="InputFile">
+                        <label for="audioInp1">
+                            Uploader un fichier audio 
+                            <input type="file" name="my_audio1" id="audioInp1" accept="audio/*"/>
+                        </label>
+                    </div>
+                    <div class="form_input" id="InputFile">
+                        <label for="imgInp1">
+                            Changer l'image
+                            <input type="file" name="my_image1_audio" id="imgInp1" accept="image/*"/>
+                        </label>
+                    </div>
+                    <select name="classCSS1" class="form_input">
+                        <option>Position de l'image</option>
+                        <option value="d-top">En haut</option>
+                        <option value="d-right">Droite</option>
+                        <option value="d-bottom">En bas</option>
+                        <option value="d-left">Gauche</option>
+                    </select>
+                    <input type="text" name="legende1" id="legende" placeholder="Légende de l'audio" class="form_input">
+                    <input type="text" name="credit1" id="credit" placeholder="Crédits de l'audio" class="form_input">
+                {% elseif element1 == 'video' %}
+                    <div class="form_input" id="InputFile">
+                        <label for="videoInp1">
+                            Uploader une vidéo
+                            <input type="file" name="my_video1" id="videoInp1" accept="video/*"/>
+                        </label>
+                    </div>
+                    <div class="form_input" id="InputFile">
+                        <label for="imgInp1">
+                            Changer l'image
+                            <input type="file" name="my_image1_video" id="imgInp1" accept="image/*"/>
+                        </label>
+                    </div>
+                    <input type="text" name="legende1" id="legende" placeholder="Légende de la vidéo" class="form_input">
+                    <input type="text" name="credit1" id="credit" placeholder="Crédits de la vidéo" class="form_input">
+                {% endif %}
+            </div>
+            <div class="form_form">
+                <h1>Vous avez choisi la balise {{element2}}</h1>
+                {% if element2 == 'img' %}
+                    <select name="classCSS2" id="classCSS" class="form_input">
+                        <option value="">--- Choisissez un style ---</option>
+                        <option value="modal">Avec Trigger</option>
+                        <option value="">Sans Trigger</option>
+                    </select>
+                    <div class="form_input" id="InputFile">
+                        <label for="imgInp2">
+                            Changer l'image
+                            <input type="file" name="my_image2" id="imgInp2" accept="image/*"/>
+                        </label>
+                    </div>
+                    <input type="text" name="legende2" id="legende" placeholder="Légende de l'image" class="form_input">
+                    <input type="text" name="credit2" id="credit" placeholder="Crédits de l'image" class="form_input">
+                {% elseif element2 == 'audio_image' %}
+                    <div class="form_input" id="InputFile">
+                        <label for="audioInp2">
+                            Uploader un fichier audio 
+                            <input type="file" name="my_audio2" id="audioInp2" accept="audio/*"/>
+                        </label>
+                    </div>
+                    <div class="form_input" id="InputFile">
+                        <label for="imgInp2">
+                            Changer l'image
+                            <input type="file" name="my_image2_audio" id="imgInp2" accept="image/*"/>
+                        </label>
+                    </div>
+                    <select name="classCSS2" class="form_input">
+                        <option>Position de l'image</option>
+                        <option value="d-top">En haut</option>
+                        <option value="d-right">Droite</option>
+                        <option value="d-bottom">En bas</option>
+                        <option value="d-left">Gauche</option>
+                    </select>
+                    <input type="text" name="legende2" id="legende" placeholder="Légende de l'audio" class="form_input">
+                    <input type="text" name="credit2" id="credit" placeholder="Crédits de l'audio" class="form_input">
+                {% elseif element2 == 'audio' %}
+                    <div class="form_input" id="InputFile">
+                        <label for="audioInp2">
+                            Uploader un fichier audio 
+                            <input type="file" name="my_audio2" id="audioInp2" accept="audio/*"/>
+                        </label>
+                    </div>
+                    <input type="text" name="legende2" id="legende" placeholder="Légende de l'audio" class="form_input">
+                    <input type="text" name="credit2" id="credit" placeholder="Crédits de l'audio" class="form_input">
+                {% elseif element2 == 'video' %}
+                    <div class="form_input" id="InputFile">
+                        <label for="videoInp2">
+                            Uploader une vidéo
+                            <input type="file" name="my_video2" id="videoInp2" accept="video/*"/>
+                        </label>
+                    </div>
+                    <div class="form_input" id="InputFile">
+                        <label for="imgInp1">
+                            Changer l'image
+                            <input type="file" name="my_image2_video" id="imgInp1" accept="image/*"/>
+                        </label>
+                    </div>
+                    <input type="text" name="legende2" id="legende" placeholder="Légende de la vidéo" class="form_input">
+                    <input type="text" name="credit2" id="credit" placeholder="Crédits de la vidéo" class="form_input">
+                {% endif %}
+            </div>
+        </div>
+        <input type="number" name="position" id="position" min="1" max="100" placeholder="Position de l'element" class="form_input">
+        <select name="article" class="form_input">
+            <option value="">---Choisissez un article---</option>
+            {% for article in articles %}
+                <option value="{{article.id}}">{{article.article_name}}</option>                            
+            {% endfor %}
+        </select>
+        <input type="submit" value="Valider" class="form_input_submit" name="submit_content_media">
+    </form>
+{% endblock %}

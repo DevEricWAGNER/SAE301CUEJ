@@ -1,0 +1,14 @@
+{% extends "base.twig" %}
+
+{% block main %}
+    <form action="index.php?action=element" method="post">
+        <select name="element_to_edit" id="element_to_edit" class="form_input">
+            <option value="">---Choississez un element à Editer ---</option>
+            
+            {% for element in elements %}
+                <option value="{{element.id}}">{{element.balise}} en position {{element.position}} Article : {{element.article}}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Valider" class="form_input_submit">
+    </form>
+{% endblock main %}

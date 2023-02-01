@@ -1,0 +1,22 @@
+{% extends "base.twig" %}
+
+{% block main %}
+    <form action="index.php?action=element_delete" method="post">
+            <div class="form_post">
+                <div class="form_form">
+                    <select name="element_id" id="element_page_number" class="form_input">
+                        <option value="">---Veuillez choisir un element---</option>
+                        {% for element in elements %}
+                            <option value="{{element.id}}">{{element.balise}} en position {{element.position}} de l'article {{element.article}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form_img">
+                    <img src="https://cdn-icons-png.flaticon.com/512/73/73775.png" alt="">
+                </div>
+            </div>
+            <input type="submit" value="Valider" class="form_input_submit">
+        </form>
+        <p class="delete_entry">Préférez-vous créer un element ?<br><a href="index.php?action=create_element">Cliquez ici !</a></p>
+
+{% endblock main %}

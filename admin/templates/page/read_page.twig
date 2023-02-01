@@ -1,0 +1,26 @@
+{% extends "base.twig" %}
+
+{% block title %}
+    {{unique_page.page_name}}
+{% endblock %}
+
+{% block desc %}
+  <meta name="description" content="{{unique_page.page_desc}}"> {# VISIBLE QUE SI LE SITE EST REFERENCE SUR LE WEB #}
+{% endblock %}
+
+{% block main %}
+    <h1>{{unique_page.page_name}}</h1>
+    <h2>{{unique_page.page_desc}}</h2>
+    <img src="{{unique_page.page_img}}">
+    {% for contenu in contenu_page %}
+        <article>
+            <img src="{{contenu.article_img}}">
+            <div>
+                <h1>{{contenu.article_name}}</h1>
+                <h4>Par {{contenu.article_auteur}}</h4>
+                <a href="index.php?action=read_article&article_id={{contenu.id}}">Voir l'article...</a>
+                <span>{{contenu.article_time}} min</span>
+            </div>
+        </article>
+    {% endfor %}
+{% endblock %}

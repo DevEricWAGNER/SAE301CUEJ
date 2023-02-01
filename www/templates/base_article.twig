@@ -1,0 +1,129 @@
+<html lang="fr">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{% block title %}{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hind+Madurai:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+	  <link rel="stylesheet" href="css/site_style.css">
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+  />
+  <link rel="stylesheet" href="styles/style.css" />
+  <link rel="stylesheet" href="css/audio.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="css/css.css">
+    <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
+    
+      {% if page_id == 1 %}
+        <link rel="icon" href="images/logo_cat1.png" type="image/x-icon">
+      {% elseif page_id == 2 %}
+        <link rel="icon" href="images/logo_cat3.png" type="image/x-icon">
+      {% elseif page_id == 3 %}
+        <link rel="icon" href="images/logo_cat2.png" type="image/x-icon">
+      {% else %}
+        <link rel="icon" href="images/logo_rouge.png" type="image/x-icon">
+      {% endif %}
+
+
+    {% block desc %}{% endblock %}
+	
+</head>
+
+<body>
+    {# <span class="text-[{{unique_article.color}}]">...</span> #}
+	<nav id="nav" class="px-3 lg:px-[30px] fixed w-full">
+      <a href="index.php?action=site_accueil">
+      {% if page_id == 1 %}
+        <img class="w-[50px] h-[55px] non-agrandi" src="images/logo_cat1.png" alt="logo" />
+      {% elseif page_id == 2 %}
+        <img class="w-[50px] h-[55px] non-agrandi" src="images/logo_cat3.png" alt="logo" />
+      {% elseif page_id == 3 %}
+        <img class="w-[50px] h-[55px] non-agrandi" src="images/logo_cat2.png" alt="logo" />
+      {% else %}
+        <img class="w-[50px] h-[55px] non-agrandi" src="images/logo.png" alt="logo" />
+      {% endif %}
+      </a>
+
+      
+      <h1 class="text-5xl font-bold" style="font-family: 'Montserrat', sans-serif">Les <span class="text-[{{unique_article.color}}]">bêtes</span> en nous</h1>
+
+      <ul class="nav-links">
+      {% for page in pages %}
+        <li>
+          <a class="slide-line flex gap-[20px] items-center" href="#">
+            <span class="text-center">{{page.page_name}}</span>
+            <button>
+              <img
+                src="images/icons/icon-arrow-down.svg"
+                alt="icon-arrow-down"
+                class="non-agrandi"
+              />
+            </button>
+          </a>
+          <ul class="submenu my-5 flex-col gap-y-2 pl-4 text-xl">
+            {% for article in page.articles %}
+              <li>
+                <a href="index.php?action=site_article&page_id={{page.id}}&article_id={{article.id}}" class="hover:font-bold">{{article.article_name}}</a>
+              </li>
+		        {% endfor %}
+          </ul>
+        </li>
+      {% endfor %}
+        <li><a class="slide-line" href="index.php?action=site_credits">Crédits</a></li>
+        <li><a class="slide-line" href="../admin/login.php">Administration</a></li>
+      </ul>
+
+      <div class="hamburger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+    </nav>
+    {% block main %}
+    
+    {% endblock %}
+    
+
+    <footer
+      class="mt-[150px] h-[75px] bg-[#DD523F] text-white flex items-center justify-center">
+      <a class="slide-line text-white text-1xl" href="index.php?action=site_credits">Crédits</a>
+    </footer>
+    <div class="progress_bar" style="background: {{unique_article.color}};" ></div>
+
+	<script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
+  <script>
+    const progress_Bar = document.querySelector('.progress_bar');
+    progress_Bar.style.display = "none";
+
+    window.addEventListener('scroll', handleScroll);
+
+    function handleScroll() {
+        progress_Bar.style.display = "block";
+        const height = document.body.scrollHeight; // taille du site
+        const windowHeight = window.innerHeight; // taille de l'affichage
+        const position = window.pageYOffset; // la position en pixels du document
+        
+        const trackLength = height - windowHeight; // taille du site - la partie affichée sur l'écran en ce moment (exemple : 1000px)
+        
+        const percentage = 
+                Math.floor((position / trackLength) * 100); // pourcentage du site déjà parcouru
+        
+        progress_Bar
+            .style.right = 100 - percentage + '%';
+    }
+  </script>
+	<script src="js/main.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/script.js"></script>
+	
+</body>
+
+</html>

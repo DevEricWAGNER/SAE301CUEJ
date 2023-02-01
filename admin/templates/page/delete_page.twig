@@ -1,0 +1,22 @@
+{% extends "base.twig" %}
+
+{% block main %}
+        <form action="index.php?action=page_delete" method="post">
+            <div class="form_post">
+                <div class="form_form">
+                    <select name="page_id" id="article_page_number" class="form_input">
+                        <option value="">---Veuillez choisir une page---</option>
+                        {% for page in pages %}
+                            <option value="{{page.id}}">{{page.page_name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form_img">
+                    <img src="https://cdn-icons-png.flaticon.com/512/73/73775.png" alt="">
+                </div>
+            </div>
+            <input type="submit" value="Valider" class="form_input_submit">
+        </form>
+        <p class="delete_entry">Préférez-vous créer un article ?<br><a href="index.php?action=create_page">Cliquez ici !</a></p>
+
+{% endblock main %}

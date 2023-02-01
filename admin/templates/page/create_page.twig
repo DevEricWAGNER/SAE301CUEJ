@@ -1,0 +1,31 @@
+{% extends "base.twig" %}
+
+{% block main %}
+<h1>Il vous reste {{(3 - nbr)}} pages à créer</h1>
+    <form action="index.php?action=new_page" method="post" enctype="multipart/form-data">
+        <div class="form_post">
+            <div class="form_form">
+                <input type="text" name="page_name" id="page_name" placeholder="Nom de la page" class="form_input">
+                <input type="text" name="page_desc" id="page_desc" placeholder="Descritpion" class="form_input">
+                <div class="form_input">
+                    <label for="imgInp">
+                        Changer l'image
+                        <input type="file" name="image_page" id="imgInp" accept="image/*"/>
+                    </label>
+                </div>
+                <select name="color" id="color" class="form_input">
+                    <option>--- Choisissez une couleur ---</option>
+                    <option value="#64D039">Vert</option>
+                    <option value="#F7B538">Marron</option>
+                    <option value="#502419">Jaune</option>
+                </select>
+            </div>
+            <div class="form_img">
+                <img id="blah" src="https://cdn-icons-png.flaticon.com/512/73/73775.png" alt="">
+            </div>
+        </div>
+        <input type="submit" value="Valider" class="form_input_submit" name="submit">
+    </form>
+    <p class="delete_entry">Préférez-vous supprimer une page ?<br><a href="index.php?action=delete_page">Cliquez ici !</a></p>
+
+{% endblock main %}

@@ -1,0 +1,173 @@
+{% extends "base.twig" %}
+
+{% block main %}
+    <h1>Vous avez choisi la balise {{balise}}</h1>
+    {% if balise == 'img' %}
+        <form action="index.php?action=new_element&balise={{balise}}" method="post" enctype="multipart/form-data">
+            <div class="form_post">
+                    <div class="form_form">
+                        <select name="classCSS" id="classCSS" class="form_input">
+                            <option value="">--- Choisissez un style ---</option>
+                            <option value="float-left modal">A gauche du texte avec Trigger</option>
+                            <option value="float-right modal">A droite du texte avec Trigger</option>
+                            <option value="modal">Seule avec Trigger</option>
+                            <option value="float-left">A gauche du texte sans Trigger</option>
+                            <option value="float-right">A droite du texte sans Trigger</option>
+                            <option value="">Seule sans Trigger</option>
+                        </select>
+                        <input type="file" name="my_image" id="imgInp" accept="image/*"/>
+                        <input type="text" name="legende" id="legende" placeholder="Légende de l'image" class="form_input">
+                        <input type="text" name="credit" id="credit" placeholder="Crédits de l'image" class="form_input">
+                        <input type="number" name="position" id="position" min="1" max="100" placeholder="Position de l'element" class="form_input">
+                        <select name="article" class="form_input">
+                            <option value="">---Choisissez un article---</option>
+                            {% for article in articles %}
+                                <option value="{{article.id}}">{{article.article_name}}</option>                            
+                            {% endfor %}
+                        </select>
+                    </div>
+                <div class="form_img">
+                    <img id="blah" src="https://cdn-icons-png.flaticon.com/512/73/73775.png" alt="">
+                </div>
+            </div>
+            <input type="submit" value="Valider" class="form_input_submit" name="submit_img">
+        </form>
+
+    {% elseif balise == 'audio' %}
+        <form action="index.php?action=create_elemnt_balise_audio&balise={{balise}}" method="post" enctype="multipart/form-data">
+            <div class="form_post">
+                    <div class="form_form">
+                        <select name="audio_image" class="form_input">
+                            <option>--- Choisissez le type d'audio que vous voulez ---</option>
+                            <option value="with">Avec Image</option>
+                            <option value="without">Sans Image</option>
+                        </select>
+                    </div>
+            </div>
+            <input type="submit" value="Valider" class="form_input_submit" name="submit_audio">
+        </form>
+    {% elseif balise == 'video' %}
+        <form action="index.php?action=new_element&balise={{balise}}" method="post" enctype="multipart/form-data">
+            <div class="form_post">
+                    <div class="form_form">
+                        <select name="classCSS1" id="classCSS" class="form_input">
+                            <option value="">--- Choisissez un style ---</option>
+                            <option value="float-left">A gauche du texte</option>
+                            <option value="float-right">A droite du texte</option>
+                            <option value="">Seule</option>
+                        </select>
+                        <input type="file" name="my_video" id="videoInp" accept="video/*"/>
+                        <input type="text" name="legende" id="legende" placeholder="Légende de la vidéo" class="form_input">
+                        <input type="text" name="credit" id="credit" placeholder="Crédits de la vidéo" class="form_input">
+                        <div class="form_input" id="InputFile">
+                            <label for="imgInp">
+                                Changer l'image de couverture
+                                <input type="file" name="my_image_video" id="imgInp" accept="image/*"/>
+                            </label>
+                        </div>
+                        <input type="number" name="position" id="position" min="1" max="100" placeholder="Position de l'element" class="form_input">
+                        <select name="article" class="form_input">
+                            <option value="">---Choisissez un article---</option>
+                            {% for article in articles %}
+                                <option value="{{article.id}}">{{article.article_name}}</option>                            
+                            {% endfor %}
+                        </select>
+                    </div>
+            </div>
+            <input type="submit" value="Valider" class="form_input_submit" name="submit_video">
+        </form>
+    {% elseif balise == 'media_media' %}
+        <form action="index.php?action=create_element_balise_double&balise={{balise}}" method="post" enctype="multipart/form-data">
+            <div class="form_post">
+                <div class="form_form">
+                    <select name="element1" class="form_input">
+                        <option value="">--- Choisissez votre premier element ---</option>
+                        <option value="img">Image</option>
+                        <option value="video">Videos</option>
+                        <option value="audio_image">Audio avec Image</option>
+                        <option value="audio">Audio sans Image</option>
+                    </select>
+                    <select name="element2" class="form_input">
+                        <option value="">--- Choisissez votre premier element ---</option>
+                        <option value="img">Image</option>
+                        <option value="video">Videos</option>
+                        <option value="audio_image">Audio avec Image</option>
+                        <option value="audio">Audio sans Image</option>
+                    </select>
+                </div>
+            </div>
+            <input type="submit" value="Valider" class="form_input_submit" name="submit_content_media">
+        </form>
+    {% elseif balise == "encadre_media" %}
+        <form action="index.php?action=create_element_balise_encadre&balise={{balise}}" method="post" enctype="multipart/form-data">
+            <div class="form_post">
+                <div class="form_form">
+                    <select name="media" class="form_input">
+                        <option value="">--- Quel est le media de l'Encadré ---</option>
+                        <option value="img">Image</option>
+                        <option value="video">Videos</option>
+                        <option value="audio_image">Audio avec Image</option>
+                        <option value="audio">Audio sans Image</option>
+                    </select>
+                </div>
+            </div>
+            <input type="submit" value="Valider" class="form_input_submit" name="submit_content_media">
+        </form>
+    {% elseif balise == "encadre_content" %}
+        <form action="index.php?action=new_element&balise={{balise}}" method="post" enctype="multipart/form-data">
+            <div class="form_post">
+                <div class="form_form">
+                    <input type="text" name="title_encadre" id="title_encadre" placeholder="Titre de l'encadré" class="form_input">
+                    <input type="text" name="content" id="content" placeholder="Contenu de l'encadré" class="form_input">
+                    <select name="classCSS2" class="form_input">
+                        <option>--- Choisissez où vous voulez positionner l'encadré ---</option>
+                        <option value="float-left">A gauche</option>
+                        <option value="float-right">A droite</option>
+                    </select>
+                    <input type="number" name="position" id="position" min="1" max="100" placeholder="Position de l'element" class="form_input">
+                    <select name="article" class="form_input">
+                        <option value="">---Choisissez un article---</option>
+                        {% for article in articles %}
+                            <option value="{{article.id}}">{{article.article_name}}</option>                            
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <input type="submit" value="Valider" class="form_input_submit" name="submit_encadre_content">
+        </form>
+    {% elseif balise == 'h5' %}
+        <form action="index.php?action=new_element&balise={{balise}}" method="post" enctype="multipart/form-data">
+            <div class="form_post">
+                <div class="form_form">
+                    <input type="text" name="content" id="content" placeholder="Contenu de la balise" class="form_input exergue">
+                    <input type="number" name="position" id="position" min="1" max="100" placeholder="Position de l'element" class="form_input">
+                    <select name="article" class="form_input">
+                        <option value="">---Choisissez un article---</option>
+                        {% for article in articles %}
+                            <option value="{{article.id}}">{{article.article_name}}</option>                            
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <input type="submit" value="Valider" class="form_input_submit" name="submit_text">
+        </form>
+    {% else %}
+        <form action="index.php?action=new_element&balise={{balise}}" method="post" enctype="multipart/form-data">
+            <div class="form_post">
+                <div class="form_form">
+                    <input type="text" name="content" id="content" placeholder="Contenu de la balise" class="form_input">
+                    <input type="number" name="position" id="position" min="1" max="100" placeholder="Position de l'element" class="form_input">
+                    <select name="article" class="form_input">
+                        <option value="">---Choisissez un article---</option>
+                        {% for article in articles %}
+                            <option value="{{article.id}}">{{article.article_name}}</option>                            
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <input type="submit" value="Valider" class="form_input_submit" name="submit_text">
+        </form>
+    {% endif %}
+        <p class="delete_entry">Préférez-vous supprimer un element ?<br><a href="index.php?action=delete_element">Cliquez ici !</a></p>
+
+{% endblock main %}

@@ -1,0 +1,35 @@
+{% extends "base.twig" %}
+
+{% block main %}
+    <form action="index.php?action=create_element_balise" method="post" enctype="multipart/form-data">
+            <div class="form_post">
+                <div class="form_form">
+                        <select name="balise" id="balise" class="form_input">
+                            <option value="">--- Choisissez une balise ---</option>
+                            <option value="p">Texte</option>
+                            <option value="media_media">Media + Media</option>
+                            <option value="h3">Inter Titre</option>
+                            <option value="h5">Exergue</option>
+                            <option value="h2">Titre article secondaire</option>
+                            <option value="img">Image</option>
+                            <option value="video">Videos</option>
+                            <option value="audio">Audio</option>
+                            <option value="encadre_media">Encadré avec media</option>
+                            <option value="encadre_content">Encadré avec contenu</option>
+                        </select>
+                </div>
+                <div class="form_img">
+                    <img id="blah" src="https://cdn-icons-png.flaticon.com/512/73/73775.png" alt="">
+                </div>
+            </div>
+            <input type="submit" value="Valider" class="form_input_submit">
+        </form>
+
+{% endblock main %}
+
+{#
+    Textes
+    Audios
+    Videos
+    Photos
+#}

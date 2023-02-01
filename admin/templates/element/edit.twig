@@ -1,0 +1,122 @@
+{% extends "base.twig" %}
+
+{% block main %}
+        {% for element in element_unique %}
+            {% if element.balise != 'img' and element.balise != 'video' and element.balise != 'audio' %}
+                <form action="index.php?action=update&element_id={{element_id}}" method="post" enctype="multipart/form-data">
+                    <input type="text" name="content" id="content" class="form_input" value="{{element.content}}">
+                    <input type="text" name="classSS" id="classCSS" class="form_input" value="{{element.classCSS}}">
+                    <input type="number" name="position" id="position" min="1" max="100" placeholder="Position de l'element" value="{{element.position}}" class="form_input">
+                    <select name="article" class="form_input">
+                        <option value="{{element.article}}">{{element.article_name}}</option>
+                        <option>▬▬▬ Liste des articles disponnibles ▬▬▬</option>
+                        {% for article in articles %}
+                            <option value="{{article.id}}">{{article.article_name}}</option>                            
+                        {% endfor %}
+                    </select>
+                    <input type="submit" name="submit_text" value="Valider" class="form_input_submit">
+                </form>
+            {% elseif element.balise == 'img' %}
+                <form action="index.php?action=update&element_id={{element_id}}" method="post" enctype="multipart/form-data">
+                    <div class="form_post">
+                            <div class="form_form">
+                                <select name="classCSS" id="classCSS" class="form_input">
+                                    <option value="{{element.classCSS}}">{{element.classCSS}}</option>
+                                    <option value="">--- Choisissez un style ---</option>
+                                    <option value="img_left">Alignée à Gauche</option>
+                                    <option value="img_right">Alignée à Droite</option>
+                                    <option value="img_center">Alignée à Centre</option>
+                                    <option value="full_size">Toute le largeur de la page</option>
+                                </select>
+                                <div class="form_input">
+                                    <label for="imgInp">
+                                        Changer l'image
+                                        <input type="file" name="my_image" id="imgInp" accept="image/*"/>
+                                    </label>
+                                </div>
+                                <input type="text" name="legende" id="legende" placeholder="Légende de la vidéo" value="{{element.legende}}" class="form_input">
+                                <input type="text" name="credit" id="credit" placeholder="Crédits de la vidéo" value="{{element.credit}}" class="form_input">
+                                <input type="number" name="position" id="position" min="1" max="100" value="{{element.position}}" placeholder="Position de l'element" class="form_input">
+                                <select name="article" class="form_input">
+                                    <option value="">{{element.article_name}}</option>
+                                    <option>▬▬▬ Liste des articles disponnibles ▬▬▬</option>
+                                    {% for article in articles %}
+                                        <option value="{{article.id}}">{{article.article_name}}</option>                            
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        <div class="form_img">
+                            <img id="blah" src="{{element.img_src}}" alt="{{element.img_alt}}">
+                        </div>
+                    </div>
+                    <input type="submit" value="Valider" class="form_input_submit" name="submit_img">
+                </form>
+            {% elseif element.balise == 'video' %}
+                <form action="index.php?action=update&element_id={{element_id}}" method="post" enctype="multipart/form-data">
+                    <div class="form_post">
+                            <div class="form_form">
+                                <select name="classCSS" id="classCSS" class="form_input">
+                                    <option value="{{element.classCSS}}">{{element.classCSS}}</option>
+                                    <option value="">--- Choisissez un style ---</option>
+                                    <option value="img_left">Alignée à Gauche</option>
+                                    <option value="img_right">Alignée à Droite</option>
+                                    <option value="img_center">Alignée à Centre</option>
+                                    <option value="full_size">Toute le largeur de la page</option>
+                                </select>
+                                <div class="form_input">
+                                    <label for="imgInp">
+                                        Changer la Vidéo
+                                        <input type="file" name="my_video" id="imgInp" accept="video/mp4"/>
+                                    </label>
+                                </div>
+                                <input type="text" name="legende" id="legende" placeholder="Légende de la vidéo" value="{{element.legende}}" class="form_input">
+                                <input type="text" name="credit" id="credit" placeholder="Crédits de la vidéo" value="{{element.credit}}" class="form_input">
+                                <input type="number" name="position" id="position" min="1" max="100" value="{{element.position}}" placeholder="Position de l'element" class="form_input">
+                                <select name="article" class="form_input">
+                                    <option value="">{{element.article_name}}</option>
+                                    <option>▬▬▬ Liste des articles disponnibles ▬▬▬</option>
+                                    {% for article in articles %}
+                                        <option value="{{article.id}}">{{article.article_name}}</option>                            
+                                    {% endfor %}
+                                </select>
+                            </div>
+                    </div>
+                    <input type="submit" value="Valider" class="form_input_submit" name="submit_video">
+                </form>
+            {% elseif element.balise == 'audio' %}
+                <form action="index.php?action=update&element_id={{element_id}}" method="post" enctype="multipart/form-data">
+                    <div class="form_post">
+                            <div class="form_form">
+                                <select name="classCSS" id="classCSS" class="form_input">
+                                    <option value="{{element.classCSS}}">{{element.classCSS}}</option>
+                                    <option value="">--- Choisissez un style ---</option>
+                                    <option value="img_left">Alignée à Gauche</option>
+                                    <option value="img_right">Alignée à Droite</option>
+                                    <option value="img_center">Alignée à Centre</option>
+                                    <option value="full_size">Toute le largeur de la page</option>
+                                </select>
+                                <div class="form_input">
+                                    <label for="imgInp">
+                                        Changer l'audio
+                                        <input type="file" name="my_audio" id="imgInp" accept="audio/mp3"/>
+                                    </label>
+                                </div>
+                                <input type="text" name="legende" id="legende" placeholder="Légende de la vidéo" value="{{element.legende}}" class="form_input">
+                                <input type="text" name="credit" id="credit" placeholder="Crédits de la vidéo" value="{{element.credit}}" class="form_input">
+                                <input type="number" name="position" id="position" min="1" max="100" value="{{element.position}}" placeholder="Position de l'element" class="form_input">
+                                <select name="article" class="form_input">
+                                    <option value="">{{element.article_name}}</option>
+                                    <option>▬▬▬ Liste des articles disponnibles ▬▬▬</option>
+                                    {% for article in articles %}
+                                        <option value="{{article.id}}">{{article.article_name}}</option>                            
+                                    {% endfor %}
+                                </select>
+                            </div>
+                    </div>
+                    <input type="submit" value="Valider" class="form_input_submit" name="submit_audio">
+                </form>
+            {% endif %}
+        {% endfor %}
+        
+        
+{% endblock main %}

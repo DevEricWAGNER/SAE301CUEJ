@@ -1,0 +1,22 @@
+{% extends "base.twig" %}
+
+{% block main %}
+    <form action="index.php?action=article_delete" method="post">
+            <div class="form_post">
+                <div class="form_form">
+                    <select name="article_id" id="article_page_number" class="form_input">
+                        <option value="">---Veuillez choisir un article---</option>
+                        {% for article in articles %}
+                            <option value="{{article.id}}">{{article.article_name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form_img">
+                    <img src="https://cdn-icons-png.flaticon.com/512/73/73775.png" alt="">
+                </div>
+            </div>
+            <input type="submit" value="Valider" class="form_input_submit">
+        </form>
+        <p class="delete_entry">Préférez-vous créer un article ?<br><a href="index.php?action=create_article">Cliquez ici !</a></p>
+
+{% endblock main %}
